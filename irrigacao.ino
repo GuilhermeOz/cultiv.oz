@@ -35,19 +35,21 @@ void setup() {
 // A função loop fica sendo executada de maneira contínua
 void loop() {
 
-  // espera 10 segundos e liga torneira
-  delay(10000);
-  ligarTorneira(ReleVasoPequeno);
 
- // espera 10 segundos e desliga a torneira
-  delay(10000);
-  desligarTorneira(ReleVasoPequeno);
+delay(10000);
+ligarTorneira(ReleVasoPequeno);
+delay(10000);
+desligarTorneira(ReleVasoPequeno);
+
 
   //leitura do sensor solo grande
   lerSensorSolo(SensorSoloGrande, valorUmidadeSoloGrande, ReleVasoGrande);
 
   //leitura do sensor solo médio
   lerSensorSolo(SensorSoloMedio, valorUmidadeSoloMedio, ReleVasoMedio);
+
+
+/* CONTADOR
 
   if (contador == 60){
     ligarTorneira(ReleVasoPequeno);
@@ -56,7 +58,9 @@ void loop() {
   //aguarda 60 segundos
   delay (60000);
 
-  contador = contador + 1;    
+//  contador = contador + 1;    
+
+*/
 
 }
 
@@ -92,7 +96,7 @@ void lerSensorSolo(int parametroSensorSolo, int parametroValorUmidade, int param
 void ligarTorneira(int parametroReleTorneira){
 
   digitalWrite(parametroReleTorneira, HIGH);
-  delay (4000);
+
   
 }
 
