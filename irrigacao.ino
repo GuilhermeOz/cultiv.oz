@@ -93,7 +93,7 @@ void lerSensorSolo(int parametroSensorSolo, int parametroValorUmidade, int param
     ligarTorneira(parametroRele);
 
     Serial.println("seco, ligar torneira");
-    Serial.println("%d", parametroRele);
+    Serial.println(parametroRele,DEC);
     Serial.println("");  
   }
   //se a leitura do solo for menor que o valor máximo molhado (350), significa que está molhado
@@ -102,7 +102,7 @@ void lerSensorSolo(int parametroSensorSolo, int parametroValorUmidade, int param
     desligarTorneira(parametroRele);
 
     Serial.println("molhado, desligar torneira");
-    Serial.println("%d", parametroRele);
+    Serial.println(parametroRele,DEC);
     Serial.println("");  
   }
 }
