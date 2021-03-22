@@ -57,7 +57,7 @@ desligarTorneira(ReleVasoPequeno);
   //aguarda 60 segundos
   delay (600);
 
-  contador = contador + 1;    
+  contador = contador + 1; 
 
 */
 
@@ -67,7 +67,7 @@ void ligarTorneira(int parametroReleTorneira){
 
   digitalWrite(parametroReleTorneira, HIGH);
 
-  
+  delay(10000);
 }
 
 void desligarTorneira(int parametroReleTorneira){
