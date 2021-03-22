@@ -35,12 +35,6 @@ void setup() {
 // A função loop fica sendo executada de maneira contínua
 void loop() {
 
-/*
-delay(10000);
-ligarTorneira(ReleVasoPequeno);
-delay(10000);
-desligarTorneira(ReleVasoPequeno);
-*/
 
   //leitura do sensor solo grande
   lerSensorSolo(SensorSoloGrande, valorUmidadeSoloGrande, ReleVasoGrande);
@@ -49,8 +43,7 @@ desligarTorneira(ReleVasoPequeno);
 //  lerSensorSolo(SensorSoloMedio, valorUmidadeSoloMedio, ReleVasoMedio);
 
 
-/*
-  if (contador == 6000){
+if (contador == 6000){
     ligarTorneira(ReleVasoPequeno);
   }
 
@@ -59,7 +52,6 @@ desligarTorneira(ReleVasoPequeno);
 
   contador = contador + 1; 
 
-*/
 
 }
 
@@ -93,7 +85,6 @@ void lerSensorSolo(int parametroSensorSolo, int parametroValorUmidade, int param
     ligarTorneira(parametroRele);
 
     Serial.println("seco, ligar torneira");
-    Serial.println(parametroRele,DEC);
     Serial.println("");  
   }
   //se a leitura do solo for menor que o valor máximo molhado (350), significa que está molhado
@@ -102,7 +93,6 @@ void lerSensorSolo(int parametroSensorSolo, int parametroValorUmidade, int param
     desligarTorneira(parametroRele);
 
     Serial.println("molhado, desligar torneira");
-    Serial.println(parametroRele,DEC);
     Serial.println("");  
   }
 }
