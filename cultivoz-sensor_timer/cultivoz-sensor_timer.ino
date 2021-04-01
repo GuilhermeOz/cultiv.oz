@@ -10,7 +10,7 @@
 #define MUITOSECO 0,25
 #define SECO 25,50
 #define UMIDO 50,75
-#define MUITOUMIDO 75,100
+#define MUITOUMIDO 70,76
 
 
 int IntervaloVasoPequeno = 10; // variável que indica, em segundos, o intervalo desejado para a torneira do vaso pequeno
@@ -49,10 +49,12 @@ void loop() {
   // leitura do sensor solo grande
  //  lerSensorSolo(SensorSoloGrande, valorUmidadeSoloGrande, ReleVasoGrande);
 
+
+    Serial.println(lerSensorSolo(SENSORSOLOMEDIO));
+
   // checagem do sensor vaso médio em relação ao nível de umidade desejado e acionamento do relé em função disso
-  Serial.println(lerSensorSolo(SENSORSOLOMEDIO));
-//  digitalWrite(RELEVASOMEDIO,checkSensor(SENSORSOLOMEDIO, valorUmidadeSoloMedio));
-digitalWrite(RELEVASOMEDIO,checkSensorRange(SENSORSOLOMEDIO, 0,5));
+ //  digitalWrite(RELEVASOMEDIO,checkSensor(SENSORSOLOMEDIO, valorUmidadeSoloMedio));
+    digitalWrite(RELEVASOMEDIO,!(checkSensorRange(SENSORSOLOMEDIO, MUITOUMIDO)));
 
   if (now() == (TimerVasoPequeno+IntervaloVasoPequeno)) { 
      digitalWrite(RELEVASOPEQUENO,!(digitalRead(RELEVASOPEQUENO)));
