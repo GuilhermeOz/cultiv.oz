@@ -8,10 +8,10 @@
 #define SENSORSOLOGRANDE A0       // indica que conectaremos o pino do sensor de umidade na porta analógica A0
 #define SENSORSOLOMEDIO A1       // indica que conectaremos o pino do sensor de umidade na porta analógica A1
 #define MUITOSECO 0,25
-#define SECO 25,50
 #define UMIDO 50,75
-#define MUITOUMIDO 70,76
-
+#define MUITOUMIDO 75,100
+int const SECO = 581;
+int const MOLHADO = 277;
 
 int IntervaloVasoPequeno = 10; // variável que indica, em segundos, o intervalo desejado para a torneira do vaso pequeno
 time_t TimerVasoPequeno;      // variável tipo time_t que marca o tempo p/ a rega do vaso pequeno 
@@ -50,11 +50,12 @@ void loop() {
  //  lerSensorSolo(SensorSoloGrande, valorUmidadeSoloGrande, ReleVasoGrande);
 
 
-    Serial.println(lerSensorSolo(SENSORSOLOMEDIO));
+     Serial.println(lerSensorSolo(SENSORSOLOMEDIO));
+     Serial.println(analogRead(SENSORSOLOMEDIO));
 
   // checagem do sensor vaso médio em relação ao nível de umidade desejado e acionamento do relé em função disso
  //  digitalWrite(RELEVASOMEDIO,checkSensor(SENSORSOLOMEDIO, valorUmidadeSoloMedio));
-    digitalWrite(RELEVASOMEDIO,!(checkSensorRange(SENSORSOLOMEDIO, MUITOUMIDO)));
+     digitalWrite(RELEVASOMEDIO,!(checkSensorRange(SENSORSOLOMEDIO, MUITOUMIDO)));
 
   if (now() == (TimerVasoPequeno+IntervaloVasoPequeno)) { 
      digitalWrite(RELEVASOPEQUENO,!(digitalRead(RELEVASOPEQUENO)));
@@ -63,14 +64,14 @@ void loop() {
 }
 
 int lerSensorSolo(int parametroSensorSolo) {
-  return (100-(map(analogRead(parametroSensorSolo),0,1023,0,100))); 
+    return map(analogRead(parametroSensorSolo),SECO,MOLHADO,0,100);  
 }
  
 boolean checkSensor(int parametroSensorSolo, int parametroValorUmidade){ // checa se o sensor escolhido apresenta um indice de umidade menor que o valor definido em %
-   return (lerSensorSolo(parametroSensorSolo) <= parametroValorUmidade);
+    return (lerSensorSolo(parametroSensorSolo) <= parametroValorUmidade);
 }
 
 boolean checkSensorRange(int parametroSensorSolo, int min, int max){ // checa se o sensor escolhido apresenta um indice de umidade definido em um intervalo
-   int valorSensorSolo = lerSensorSolo(parametroSensorSolo); 
-   return (valorSensorSolo >= min && valorSensorSolo <= max);
+    int valorSensorSolo = lerSensorSolo(parametroSensorSolo); 
+    return (valorSensorSolo >= min && valorSensorSolo <= max);
 }
